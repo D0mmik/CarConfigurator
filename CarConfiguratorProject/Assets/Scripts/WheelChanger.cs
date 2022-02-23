@@ -17,7 +17,8 @@ public class WheelChanger : MonoBehaviour
         for(int i = 0; i < wheels.Length; i++)
         {   
             var WheelButtonClone = Instantiate(WheelButton, transform).GetComponent<WheelButton>();
-            WheelButtonClone.ButtonInt = i;  
+            WheelButtonClone.ButtonInt = i;
+            WheelButtonClone.WheelName.text = ($"WHEEL {WheelButtonClone.ButtonInt}");  
             WheelButtonClone.Button.onClick.AddListener(()=>dothis(WheelButtonClone.ButtonInt));        
         }
     }
