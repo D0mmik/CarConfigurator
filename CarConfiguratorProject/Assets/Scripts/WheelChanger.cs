@@ -7,8 +7,10 @@ using UnityEngine.UI;
 public class WheelChanger : MonoBehaviour
 {
     public GameObject[] wheels;
-    public WheelButton WheelButton;
+    public Buttons Buttons;
     public GameObject currentclone;
+    public int currentWheel;
+
 
     void Start()
     {
@@ -16,15 +18,15 @@ public class WheelChanger : MonoBehaviour
 
         for(int i = 0; i < wheels.Length; i++)
         {   
-            var WheelButtonClone = Instantiate(WheelButton, transform).GetComponent<WheelButton>();
+            var WheelButtonClone = Instantiate(Buttons, transform).GetComponent<Buttons>();
             WheelButtonClone.ButtonInt = i;
-            WheelButtonClone.WheelName.text = ($"WHEEL {WheelButtonClone.ButtonInt}");  
+            WheelButtonClone.Name.text = ($"WHEEL {WheelButtonClone.ButtonInt}");  
             WheelButtonClone.Button.onClick.AddListener(()=>dothis(WheelButtonClone.ButtonInt));        
         }
     }
     public void dothis(int number)
     {  Destroy(currentclone);
-       Debug.Log(number);
+       currentWheel = number;
        currentclone = Instantiate(wheels[number]);
     }
 
