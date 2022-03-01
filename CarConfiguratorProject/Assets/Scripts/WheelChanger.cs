@@ -14,7 +14,6 @@ public class WheelChanger : MonoBehaviour
 
     void Start()
     {
-        //wheels = GameObject.FindGameObjectsWithTag("wheel");
 
         for(int i = 0; i < wheels.Length; i++)
         {   

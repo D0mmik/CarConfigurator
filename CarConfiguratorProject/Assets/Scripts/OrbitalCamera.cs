@@ -8,6 +8,7 @@ public class OrbitalCamera : MonoBehaviour
     public Transform Camera;
     public Camera cam;
     public float target = 40;
+    public UIButtons uIButtons;
 
     public float Sensitivity;
     public float ScrollSensitivity;
@@ -17,10 +18,13 @@ public class OrbitalCamera : MonoBehaviour
     private float mouseY;
     private float mouseWheel;
 
+
     void Update()
     {   
-        if(Input.GetMouseButton(0))
+        if(uIButtons.canOrbit == true)
         {
+            if(Input.GetMouseButton(0))
+         {
            mouseX = Input.GetAxis("Mouse X") * Sensitivity * Time.deltaTime;
            mouseY = Input.GetAxis("Mouse Y") * Sensitivity * Time.deltaTime;
 
@@ -36,23 +40,24 @@ public class OrbitalCamera : MonoBehaviour
            }
 
            transform.rotation = Quaternion.Euler(xRotation,yRotation,0);
-        }
-        if(Input.GetMouseButton(1))
-        {
+         }
+         if(Input.GetMouseButton(1))
+         {
            mouseWheel = Input.GetAxis("Mouse ScrollWheel") * ScrollSensitivity * Time.deltaTime * 50;
            target = target -= mouseWheel;
            cam.fieldOfView = Mathf.MoveTowards(cam.fieldOfView, target, ScrollSensitivity * Time.deltaTime);   
-        }
+         }
 
-        if(cam.fieldOfView >= 100)
-        {
+         if(cam.fieldOfView >= 100)
+         { 
             cam.fieldOfView = 100;
             target = 100;
-        }
-        if(cam.fieldOfView <= 20)
-        {
+         }
+         if(cam.fieldOfView <= 20)
+         {
             cam.fieldOfView = 20;
             target = 20;
+         }
         }
 
         

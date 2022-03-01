@@ -11,7 +11,6 @@ public class SpoilerChanger : MonoBehaviour
 
     void Start()
     {
-        //wheels = GameObject.FindGameObjectsWithTag("wheel");
 
         for(int i = 0; i < spolers.Length; i++)
         {   
@@ -24,7 +23,6 @@ public class SpoilerChanger : MonoBehaviour
     public void dothis(int number)
     {  Destroy(currentclone);
        currentSpoiler = number;
-       Debug.Log(number);
        currentclone = Instantiate(spolers[number]);
     }
 }
