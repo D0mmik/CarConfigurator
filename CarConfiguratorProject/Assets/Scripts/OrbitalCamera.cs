@@ -13,53 +13,70 @@ public class OrbitalCamera : MonoBehaviour
     public float Sensitivity;
     public float ScrollSensitivity;
     private float xRotation;
+    private float xRot;
     private float yRotation;
     private float mouseX;
     private float mouseY;
     private float mouseWheel;
+    private float speed = 150;
+    public bool dragging = false;
+    private Rigidbody rb;
 
+    void Start()
+    {
+      rb = GetComponent<Rigidbody>();
+    }
 
     void Update()
     {   
         if(uIButtons.canOrbit == true)
         {
-            if(Input.GetMouseButton(0))
-         {
-           mouseX = Input.GetAxis("Mouse X") * Sensitivity * Time.deltaTime;
-           mouseY = Input.GetAxis("Mouse Y") * Sensitivity * Time.deltaTime;
-
-           yRotation += mouseX;
-           xRotation += mouseY;
-           if(xRotation >= 5)
+           if(Input.GetMouseButtonDown(0))
            {
-               xRotation = 5;
-           }
-           if(xRotation <= -15)
+              dragging = true;
+           } 
+           if(Input.GetMouseButtonUp(0))
            {
-               xRotation = -15;
+              dragging = false;
+           }
+         
+           if(dragging)
+           {          
+              mouseX = Input.GetAxis("Mouse X") * speed * Time.deltaTime;
+              rb.AddTorque(Vector3.up * mouseX);
+
+              mouseY = Input.GetAxis("Mouse Y") * Sensitivity * Time.deltaTime;
+
+              xRotation += mouseY;
+              if(xRotation >= 5)
+              {
+                xRotation = 5;
+              }
+              if(xRotation <= -15)
+              {
+                xRotation = -15;
+              }
+           }
+           xRot = Mathf.MoveTowards(xRot, xRotation, 0.2f);
+           transform.rotation = Quaternion.Euler(xRot,transform.eulerAngles.y,0);
+      
+           if(Input.GetMouseButton(1))
+           {
+             mouseWheel = Input.GetAxis("Mouse ScrollWheel") * ScrollSensitivity * Time.deltaTime * 50;
+             target = target -= mouseWheel;
+             cam.fieldOfView = Mathf.MoveTowards(cam.fieldOfView, target, ScrollSensitivity * Time.deltaTime);   
            }
 
-           transform.rotation = Quaternion.Euler(xRotation,yRotation,0);
-         }
-         if(Input.GetMouseButton(1))
-         {
-           mouseWheel = Input.GetAxis("Mouse ScrollWheel") * ScrollSensitivity * Time.deltaTime * 50;
-           target = target -= mouseWheel;
-           cam.fieldOfView = Mathf.MoveTowards(cam.fieldOfView, target, ScrollSensitivity * Time.deltaTime);   
-         }
-
-         if(cam.fieldOfView >= 100)
-         { 
-            cam.fieldOfView = 100;
-            target = 100;
-         }
-         if(cam.fieldOfView <= 20)
-         {
-            cam.fieldOfView = 20;
-            target = 20;
-         }
-        }
-
-        
+           if(cam.fieldOfView >= 100)
+           { 
+              cam.fieldOfView = 100;
+              target = 100;
+           }
+           if(cam.fieldOfView <= 20)
+           {
+              cam.fieldOfView = 20;
+              target = 20;
+           }  
+        }      
     }
 }  
