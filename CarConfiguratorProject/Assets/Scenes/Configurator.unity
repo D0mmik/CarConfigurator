@@ -3401,8 +3401,6 @@ MonoBehaviour:
   motorSound: {fileID: 2100244953}
   Cam: {fileID: 963194225}
   MainCamera: {fileID: 963194227}
-  OrbitalCamera: {fileID: 2034806250}
-  orbitalCamera: {fileID: 2034806252}
   canOrbit: 0
 --- !u!1 &1370837751
 GameObject:
@@ -5280,6 +5278,7 @@ MonoBehaviour:
   CameraPosition: {fileID: 2034806251}
   Camera: {fileID: 963194228}
   cam: {fileID: 963194227}
+  Orbital: {fileID: 2034806250}
   target: 40
   uIButtons: {fileID: 1365565020}
   Sensitivity: 400

@@ -12,8 +12,6 @@ public class UIButtons : MonoBehaviour
     private bool motorPlaying = false;
     public GameObject Cam;
     public Camera MainCamera;
-    public GameObject OrbitalCamera;
-    public OrbitalCamera orbitalCamera;
     public bool canOrbit;
     
     void Start()
@@ -35,7 +33,6 @@ public class UIButtons : MonoBehaviour
             item.SetActive(false);
         }
         windows.Single((x)=> x.name == nameOfWindow).SetActive(true);
-        canOrbit = false;
     }
 
     public void WheelButton()
@@ -91,13 +88,11 @@ public class UIButtons : MonoBehaviour
     public void SaveConfigWindow()
     {
         ToggleWindow("SaveConfig");
-        canOrbit = false;
     }
 
     public void LoadConfigWindow()
     {
         ToggleWindow("LoadConfig");
-        canOrbit = false;
     }
     
     public void MotorSound()

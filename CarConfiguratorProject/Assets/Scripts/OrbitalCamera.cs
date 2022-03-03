@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class OrbitalCamera : MonoBehaviour
 {
     public Transform CameraPosition;
     public Transform Camera;
     public Camera cam;
+    public GameObject Orbital;
     public float target = 40;
     public UIButtons uIButtons;
 
@@ -77,6 +79,10 @@ public class OrbitalCamera : MonoBehaviour
               cam.fieldOfView = 20;
               target = 20;
            }  
-        }      
+        }else
+        {
+           rb.angularVelocity = Vector3.zero;
+           transform.rotation = Quaternion.identity;  
+        }    
     }
 }  
